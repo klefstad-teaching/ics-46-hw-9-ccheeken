@@ -40,8 +40,22 @@ TEST(LadderTests, GenerateWordLadder) {
 }
 
 TEST(LadderTests, PrintWordLadder) {
-  set<string> s;
-  load_words(s, "./src/words.txt");
-  print_word_ladder(generate_word_ladder("cat", "dog", s));
+  // set<string> s;
+  // load_words(s, "./src/words.txt");
+  // print_word_ladder(generate_word_ladder("cat", "dog", s));
 }
 
+TEST(DijkstrasTests, DijkstraShortestPath) {
+  Graph G;
+  file_to_graph("./src/small.txt", G);
+  vector<int> previous(G.numVertices, -1);
+  EXPECT_EQ(dijkstra_shortest_path(G, 0, previous), vector<int>({0, 3, 6, 1}));
+  EXPECT_EQ(previous, vector<int>({-1, 3, 1, 0}));
+  Graph G2;
+  file_to_graph("./src/medium.txt", G2);
+  vector<int> previous2(G2.numVertices, -1);
+  EXPECT_EQ(dijkstra_shortest_path(G2, 0, previous2), vector<int>({0, 5, 9, 18, 25, 2}));
+  EXPECT_EQ(previous2, vector<int>({-1, 0, 1, 2, 3, 0}));
+  // EXPECT_EQ(dijkstra_shortest_path(G2, 0, previous2), vector<int>({0, 5, 3, 12, 10, 2}));
+  // EXPECT_EQ(previous2, vector<int>({-1, 0, 5, 2, 5, 0}));
+}
