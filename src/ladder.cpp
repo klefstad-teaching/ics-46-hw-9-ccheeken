@@ -22,7 +22,8 @@ void print_table(int * dist_table, int i, int j) { // helper function for testin
 bool edit_distance_within(const std::string& str1, const std::string& str2, int d) {
     // calculating levenshtein distance (an edit distance)
     // https://en.wikipedia.org/wiki/Levenshtein_distance
-    int dist_table[str1.length() + 1][str2.length() + 1] = {0};
+    // int dist_table[str1.length() + 1][str2.length() + 1] = {0};
+    vector<vector<int>> dist_table(str1.length() + 1, vector<int>(str2.length() + 1, 0));
     for (int i=1; i <= str1.length(); ++i) { dist_table[i][0] = i; }
     for (int j=1; j <= str2.length(); ++j) { dist_table[0][j] = j; }
     int substitution_cost;
