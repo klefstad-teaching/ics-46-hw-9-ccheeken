@@ -59,3 +59,22 @@ TEST(DijkstrasTests, DijkstraShortestPath) {
   // EXPECT_EQ(dijkstra_shortest_path(G2, 0, previous2), vector<int>({0, 5, 3, 12, 10, 2}));
   // EXPECT_EQ(previous2, vector<int>({-1, 0, 5, 2, 5, 0}));
 }
+
+TEST(DijkstrasTests, ExtractShortestPath) {
+  Graph G;
+  file_to_graph("./src/small.txt", G);
+  vector<int> previous(G.numVertices, -1);
+  vector<int> distances = dijkstra_shortest_path(G, 0, previous);
+  EXPECT_EQ(extract_shortest_path(distances, previous, 0), vector<int>{0});
+  EXPECT_EQ(extract_shortest_path(distances, previous, 3), vector<int>({0, 3}));
+  EXPECT_EQ(extract_shortest_path(distances, previous, 2), vector<int>({0, 3, 1, 2}));
+}
+
+TEST(DijkstrasTests, PrintPath) {
+  Graph G;
+  file_to_graph("./src/small.txt", G);
+  vector<int> previous(G.numVertices, -1);
+  vector<int> distances = dijkstra_shortest_path(G, 0, previous);
+  vector<int> res = extract_shortest_path(distances, previous, 2);
+  print_path(res, 0);
+}
