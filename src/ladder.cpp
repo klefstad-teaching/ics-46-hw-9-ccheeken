@@ -79,8 +79,12 @@ void load_words(set<string> & word_list, const string& file_name) {
 }
 
 void print_word_ladder(const vector<string>& ladder) {
-    for (auto word : ladder) {
-        cout << word << ' ';
+    if (ladder.size() == 0) { cout << "No word ladder found." << endl; }
+    else {
+        cout << "Word ladder found: ";
+        for (auto word : ladder) {
+            cout << word << ' ';
+        } cout << endl;
     }
 }
 
