@@ -18,7 +18,7 @@ TEST(LadderTests, IsAdjacent) {
   EXPECT_TRUE(is_adjacent("car", "cat"));
   EXPECT_TRUE(is_adjacent("cat", "chat"));
   EXPECT_TRUE(is_adjacent("chat", "cheat"));
-  EXPECT_FALSE(is_adjacent("kanade", "KaNaDe"));
+  EXPECT_TRUE(is_adjacent("kanade", "KaNaDe"));
   EXPECT_FALSE(is_adjacent("mafuyu", "yuki"));
 }
 
@@ -40,9 +40,9 @@ TEST(LadderTests, GenerateWordLadder) {
 }
 
 TEST(LadderTests, PrintWordLadder) {
-  // set<string> s;
-  // load_words(s, "./src/words.txt");
-  // print_word_ladder(generate_word_ladder("cat", "dog", s));
+  set<string> s;
+  load_words(s, "./src/words.txt");
+  print_word_ladder(generate_word_ladder("cat", "dog", s));
 }
 
 TEST(DijkstrasTests, DijkstraShortestPath) {

@@ -23,7 +23,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     // calculating levenshtein distance (an edit distance)
     // https://en.wikipedia.org/wiki/Levenshtein_distance
     // int dist_table[str1.length() + 1][str2.length() + 1] = {0};
-    vector<vector<int>> dist_table(str1.length() + 1, vector<int>(str2.length() + 1, 0));
+    int dist_table[30][30] = {0};
     for (int i=1; i <= str1.length(); ++i) { dist_table[i][0] = i; }
     for (int j=1; j <= str2.length(); ++j) { dist_table[0][j] = j; }
     int substitution_cost;
@@ -37,7 +37,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
         }
     }
     // print_table((int*)dist_table, str1.length(), str2.length());
-    return dist_table[str1.length()][str2.length()] == d;  // d is the threshold for difference between 2 words
+    return dist_table[str1.length()][str2.length()] <= d;  // d is the threshold for difference between 2 words
 }
 
 bool is_adjacent(const string& word1, const string& word2) {
@@ -60,7 +60,7 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
             for (auto & word : word_list) {
                 if (is_adjacent(last_word, word) && (visited.find(word) == visited.end())) {
                     visited.insert(word);
-                    vector<string> new_ladder = ladder;
+                    vector<string> new_ladder(ladder);
                     new_ladder.push_back(word);
                     if (word == end_word) {
                         return new_ladder;
